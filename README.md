@@ -22,17 +22,17 @@ model figure...
 
 ## Pipeline
 
-RawTaxiData --- `map matching` ---> ParsedTaxiData
-ParsedTaxiData --- `trajectory.py` ---> recovered_trajectory_df
-recovered_trajectory_df --- `trajectory_transition.py` ---> trajectory_transition
-recovered_trajectory_df --- `flow.py` ---> flow
-road_list & road_graph --- `train_model.py` ---> road_adj
-trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
+> RawTaxiData --- `map matching` ---> ParsedTaxiData
+> ParsedTaxiData --- `trajectory.py` ---> recovered_trajectory_df
+> recovered_trajectory_df --- `trajectory_transition.py` ---> trajectory_transition
+> recovered_trajectory_df --- `flow.py` ---> flow
+> road_list & road_graph --- `train_model.py` ---> road_adj
+> trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
 
 
 ## Dataset description
 
-1. Road Network
+### 1. Road Network
 
 The list of road segments are indexed in file `data/road_list.csv`:
 | road_id |
@@ -43,23 +43,23 @@ The list of road segments are indexed in file `data/road_list.csv`:
 
 The road graph is constructed with [NetworkX](https://networkx.github.io/documentation/stable/tutorial.html) and saved in GML format in `data/road_graph.gml`. Each node represents a road segment (`label: road_id, length: in km`), and each directed edge represents the adjacency between to road segments (weight: exponential decay of distance).
 
-2. Trajectories
+### 2. Trajectories
 
-Trajectories after map matching （for map matching, refer to an algorithm with [Hidden Markov Model](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/)） are saved at `data/ParsedTaxiData_YYYYMMDD.csv`:
+Trajectories after map matching （refer to [Hidden Markov Map Matching](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/)） are saved at `data/ParsedTaxiData_YYYYMMDD.csv`:
 
 | vehicle_id | time | matched_road_id |
-|:----------:|:----------:|:----------:|:----------:|
+|:----------:|:----------:|:----------:|
 |XXXXXXX|14/03/2016 00:00:00|103047123|
 |XXXXXXX|14/03/2016 00:00:05|103063511|
 |...|...|...|
 
 Note:
-Files in the [data] folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.
+Files in the `data` folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.
 
 
 ## Prepare input
 
-1. Trajectory cleansing
+### 1. Trajectory cleansing
 
 Run '''python trajectory.py -d 20160314 >> log/trajectory0314.log'''.
 
@@ -76,7 +76,7 @@ Similarly for other dates.
 Note: the `scenario` column is for reference only (as documented in `trajectory.py`) and can be ignored.
 
 
-2. Flow aggregation
+### 2. Flow aggregation
 
 Run '''python flow.py -d 20160314 -i 15 >> log/flow0314.log'''.
 
@@ -124,9 +124,9 @@ To train and test TrGNN-, run '''python train_model.py -m TrGNN- -D demo''' with
 Trained models are saved at `model/[MODEL]_[TIMESTAMP]_[EPOCH]epoch.cpt` whenever the validation MAE breaks through. For the test set, ground truth results are save at `result/[MODEL]_[TIMESTAMP]_Y_true.pkl`, and predicted results are saved at `result/[MODEL]_[TIMESTAMP]_[EPOCH]epoch_Y_pred.pkl`. Results are of shape `# test intervals, # road segments`.
 
 
-### Experimental result
+### 3. Experimental result
 
-We run this repository on SG-TAXI dataset (the dataset has not been released) and results are summarized in the [paper] (pending release).
+We run this repository on `SG-TAXI` dataset (not released) and results are summarized in the paper (not released).
 
 
 ## Citation
