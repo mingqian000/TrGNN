@@ -53,15 +53,15 @@ Trajectories after map matching （refer to [Hidden Markov Map Matching](https:/
 |XXXXXXX|14/03/2016 00:00:05|103063511|
 |...|...|...|
 
-Note:
-Files in the `data` folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.
+*Note:
+Files in the `data` folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.*
 
 
 ## Prepare input
 
 ### 1. Trajectory cleansing
 
-Run '''python trajectory.py -d 20160314 >> log/trajectory0314.log'''.
+```python trajectory.py -d 20160314 >> log/trajectory0314.log```
 
 Results are saved at `data/recovered_trajectory_df_20160314_20160314.csv`:
 
@@ -73,12 +73,12 @@ Results are saved at `data/recovered_trajectory_df_20160314_20160314.csv`:
 
 Similarly for other dates.
  
-Note: the `scenario` column is for reference only (as documented in `trajectory.py`) and can be ignored.
+*Note: The `scenario` column is for reference only (as documented in `trajectory.py`) and can be ignored.*
 
 
 ### 2. Flow aggregation
 
-Run '''python flow.py -d 20160314 -i 15 >> log/flow0314.log'''.
+```python flow.py -d 20160314 -i 15 >> log/flow0314.log```
 
 Flows are aggregated in 15-minute intervals, and are saved at `data/flow_20160314_20160314.csv`:
 |   | road_id_0 | road_id_1 | ... |
@@ -92,34 +92,34 @@ Similarly for other dates.
 
 ## Baseline approaches (optional)
 
-For HA, run '''python baseline.py -m HA''' with correct `start_date` and `end_date`. Note: the dataset should cover more than 14 days.
+For Historical Average, run ```python baseline.py -m HA``` with correct `start_date` and `end_date`. *Note: The dataset should cover more than 14 days.*
 
-For MA, run '''python baseline.py -m MA -D demo''' for demo purpose.
+For Moving Average, run ```python baseline.py -m MA -D demo``` on dummy data.
 
-For VAR, run '''python baseline.py -m VAR -H 5 -D demo''' in 5-hop neighborhood for demo purpose.
+For Vector Auto-Regression, run ```python baseline.py -m VAR -H 5 -D demo``` in 5-hop neighborhood on dummy data.
 
-For RF, run '''python baseline.py -m RF -H 5 -n 100 -D demo''' in 5-hop neighborhood with 100 trees for demo purpose. Note: the code takes longer to complete as it trains one model for each road segment separately. 
+For Random Forest, run ```python baseline.py -m RF -H 5 -n 100 -D demo``` in 5-hop neighborhood with 100 trees on dummy data. *Note: It takes longer to run RF as it trains one model for each road segment separately.*
 
 For the test set, ground truth results are saved at `result/MODEL_Y_true.pkl`, and predicted results are saved at `result/MODEL_Y_pred.pkl`.
 
-For DCRNN, refer to its [PyTorch implementation](https://github.com/chnsh/DCRNN_PyTorch).
+For Diffusion Convolutional Recurrent Neural Network, refer to its [PyTorch implementation](https://github.com/chnsh/DCRNN_PyTorch).
 
 
 ## TrGNN
 
 ### 1. Trajectory transition
 
-(Optional) Run '''python trajectory_transition.py -d1 20160314 -d2 20160314 >> log/transition0314.log''' for one single date. Similarly for other dates.
+(Optional) Run ```python trajectory_transition.py -d1 20160314 -d2 20160314 >> log/transition0314.log``` for one single date. Similarly for other dates.
 
 The result is a tensor of shape `96 (# 15-minute intervals of day), 2404 (# road segments), 2404 (# road segments)` and is saved at `data/trajectory_transition_20160314_20160314.pkl`.
 
-Run '''python trajectory_transition.py -d1 START_DATE -d2 END_DATE >> log/transition0314.log''' for the training period.
+Run ```python trajectory_transition.py -d1 START_DATE -d2 END_DATE >> log/transition0314.log``` for the training period.
 
 
 ### 2.  Train and test TrGNN
 
-To train and test TrGNN, run '''python train_model.py -m TrGNN -D demo''' with GPU for demo purpose.
-To train and test TrGNN-, run '''python train_model.py -m TrGNN- -D demo''' with GPU for demo purpose.
+To train and test TrGNN, run ```python train_model.py -m TrGNN -D demo``` with GPU on dummy data.
+To train and test TrGNN-, run ```python train_model.py -m TrGNN- -D demo``` with GPU on dummy data.
 
 Trained models are saved at `model/[MODEL]_[TIMESTAMP]_[EPOCH]epoch.cpt` whenever the validation MAE breaks through. For the test set, ground truth results are save at `result/[MODEL]_[TIMESTAMP]_Y_true.pkl`, and predicted results are saved at `result/[MODEL]_[TIMESTAMP]_[EPOCH]epoch_Y_pred.pkl`. Results are of shape `# test intervals, # road segments`.
 
