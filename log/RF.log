@@ -1,9 +1,0 @@
-flow_df: (96, 2404)
-Total flow: 95
-road_adj: (2404, 2404)
-flow_df: (96, 2404)
-Total flow: 95
-road_adj: (2404, 2404)
-Model: RF_5hop_100estimator, Prediction window: 1
-MAE: 0.000, MAPE: nan, RMSE: 0.000, Time spent: 348.77 s
-Saving results...
