@@ -29,6 +29,11 @@ model figure...
 > road_list & road_graph --- `train_model.py` ---> road_adj
 > trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
 
+```sequence
+RawTaxiData->ParsedTaxiData: map matching
+ParsedTaxiData->recovered_trajectory_df: trajectory.py
+road_list & road_graph-->road_adj: train_model.py
+```
 
 ## Dataset description
 
