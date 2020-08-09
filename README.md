@@ -1,12 +1,12 @@
 # Traffic Flow Prediction with Vehicle Trajectories
 
-This repository is a PyTorch implementation of the model TrGNN in the paper [Traffic Flow Prediction with Vehicle Trajectories] (pending release).
+This repository is a PyTorch implementation of the model TrGNN in the paper [Traffic Flow Prediction with Vehicle Trajectories](https://github.com/mingqian000/TrGNN) (pending release).
 
+**Trajectory transition**
 ![Trajectory transition](figure/TrGNN_trajectory_transition.jpg)
-<p style="text-align: center;">**Trajectory transition**</p>
 
+**TrGNN model architecture**
 ![TrGNN model architecture](figure/TrGNN_model_architecture.jpg)
-<p style="text-align: center;">**TrGNN model architecture**</p>
 
 
 ## Requirements
@@ -156,8 +156,8 @@ The test results are saved at are saved at `result/[MODEL]_[TIMESTAMP]_Y_true.pk
 
 ### 3. Experimental result
 
-We run this repository on `SG-TAXI` dataset (not released) and results are summarized in the paper (not released).
+We run this repository on `SG-TAXI` dataset (not released) and results are summarized in the [paper](https://github.com/mingqian000/TrGNN) (pending release).
 
 
 ## Citation
-(pending...)
+(pending)
