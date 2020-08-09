@@ -22,18 +22,34 @@ model figure...
 
 ## Pipeline
 
-> RawTaxiData --- `map matching` ---> ParsedTaxiData
-> ParsedTaxiData --- `trajectory.py` ---> recovered_trajectory_df
-> recovered_trajectory_df --- `trajectory_transition.py` ---> trajectory_transition
-> recovered_trajectory_df --- `flow.py` ---> flow
-> road_list & road_graph --- `train_model.py` ---> road_adj
-> trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
+* RawTaxiData --- `map matching` ---> ParsedTaxiData
+* ParsedTaxiData --- `trajectory.py` ---> recovered_trajectory_df
+* recovered_trajectory_df --- `trajectory_transition.py` ---> trajectory_transition
+* recovered_trajectory_df --- `flow.py` ---> flow
+* road_list & road_graph --- `train_model.py` ---> road_adj
+* trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
 
-```sequence
-RawTaxiData->ParsedTaxiData: map matching
-ParsedTaxiData->recovered_trajectory_df: trajectory.py
-road_list & road_graph-->road_adj: train_model.py
 ```
+RawTaxiData --- `map matching` ---> ParsedTaxiData
+ParsedTaxiData --- `trajectory.py` ---> recovered_trajectory_df
+recovered_trajectory_df --- `trajectory_transition.py` ---> trajectory_transition
+recovered_trajectory_df --- `flow.py` ---> flow
+road_list & road_graph --- `train_model.py` ---> road_adj
+trajectory_transition & flow & road_adj --- `train_model.py` ---> TrGNN
+```
+
+```flow
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+
 
 ## Dataset description
 
