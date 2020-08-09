@@ -9,6 +9,7 @@ This repository is a PyTorch implementation of the model TrGNN in the paper [Tra
 ![TrGNN model architecture](figure/TrGNN_model_architecture.jpg)
 
 
+
 ## Requirements
 
 * PyTorch=0.4.1
@@ -16,11 +17,11 @@ This repository is a PyTorch implementation of the model TrGNN in the paper [Tra
 * numpy=1.16.5
 * scipy=1.3.1
 * pandas=0.23.4
-* folium=0.10.0
 * geopy=1.20.0
 * networkx=2.1
-* statsmodels=0.9.0 (optional for VAR)
-* scikit-learn=0.21.3 (optional for RF)
+* statsmodels=0.9.0 (optional; for VAR only)
+* scikit-learn=0.21.3 (optional; for RF only)
+* folium=0.10.0 (optional; for visualization only)
 
 
 
@@ -62,6 +63,7 @@ Trajectories after map matching （refer to [Hidden Markov Map Matching](https:/
 Files in the `data` folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.*
 
 
+
 ## Prepare input
 
 ### 1. Trajectory cleansing
@@ -99,6 +101,7 @@ Flows are aggregated in 15-minute intervals, and are saved at `data/flow_2016031
 Similarly for other dates.
 
 
+
 ## Baseline approaches (optional)
 
 Run the following commands for baseline approaches.
@@ -112,16 +115,19 @@ python baseline.py -m HA
 python baseline.py -m MA -D demo
 
 # Vector Auto-Regression. 5-hop neighborhood. Run on demo dataset for demo purpose.
+# statsmodels package is required.
 python baseline.py -m VAR -H 5 -D demo
 
 # Random Forest. 5-hop neighborhood. 100 trees. Run on demo dataset for demo purpose.
 # Note: It takes longer to run RF as it trains one model for each road segment separately.
+# scikit-learn package is required.
 python baseline.py -m RF -H 5 -n 100 -D demo
 ```
 
 The test results of the baseline approaches above are saved at `result/MODEL_Y_true.pkl` (ground truth results), and `result/MODEL_Y_pred.pkl` (predicted results).
 
 For Diffusion Convolutional Recurrent Neural Network, refer to its [PyTorch implementation](https://github.com/chnsh/DCRNN_PyTorch).
+
 
 
 ## TrGNN
@@ -156,7 +162,11 @@ The test results are saved at are saved at `result/[MODEL]_[TIMESTAMP]_Y_true.pk
 
 ### 3. Experimental result
 
-We run this repository on `SG-TAXI` dataset (not released) and results are summarized in the [paper](https://github.com/mingqian000/TrGNN) (pending release).
+We run this repository on `SG-TAXI` dataset (not released) and evaluation results are summarized in the [paper](https://github.com/mingqian000/TrGNN) (pending release).
+
+
+### 4. Visualisation (Optional)
+Refer to the second half (commented out) in `utils.py` for displaying road segments, road network, and vehicle trajectories. `folium` package is required.
 
 
 ## Citation

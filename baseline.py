@@ -4,13 +4,11 @@ import time
 from datetime import date, timedelta
 from datetime import datetime as dt
 import os
-import folium
 from utils import *
 import random
 import numpy as np
 from math import radians, degrees, sin, cos, asin, acos, sqrt
 import pickle as pkl
-import networkx as nx
 from metrics import *
 from trajectory_transition import extract_trajectory_transition
 from road_graph import extract_road_adj

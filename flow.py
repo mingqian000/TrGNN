@@ -6,7 +6,6 @@ import numpy as np
 import argparse
 from datetime import datetime as dt
 from datetime import date, timedelta
-import networkx as nx
 from utils import time_difference, round_time, df_to_csv
 from road_graph import get_road_list, road_graph
 
