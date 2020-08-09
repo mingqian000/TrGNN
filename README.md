@@ -3,10 +3,10 @@
 This repository is a PyTorch implementation of the model TrGNN in the paper [Traffic Flow Prediction with Vehicle Trajectories] (pending release).
 
 ![Trajectory transition](figure/TrGNN_trajectory_transition.jpg)
-*Trajectory transition*
+<center>**Trajectory transition**</center>
 
 ![TrGNN model architecture](figure/TrGNN_model_architecture.jpg)
-*TrGNN model architecture*
+<center>**TrGNN model architecture**</center>
 
 
 ## Requirements
