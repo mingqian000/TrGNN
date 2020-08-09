@@ -1,0 +1,10 @@
+Reading trajectories
+Initializing flow_df
+Creating new flow file
+Road list exists
+Total number of points: 106
+Saving result at index 105
+Saving to file at data/flow_20160314_20160314.csv
+Saved.
+New total flow: 95
+Finished flow aggregation. Total time spent: 0.00 hour.
