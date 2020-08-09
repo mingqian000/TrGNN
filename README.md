@@ -2,8 +2,11 @@
 
 This repository is a PyTorch implementation of the model TrGNN in the paper [Traffic Flow Prediction with Vehicle Trajectories] (pending release).
 
-model figure...
+![Trajectory transition](images/TrGNN_trajectory_transition.pdf)
+*Trajectory transition*
 
+![TrGNN model architecture](images/TrGNN_model_architecture.pdf)
+*TrGNN model architecture*
 
 ## Requirements
 
@@ -37,10 +40,10 @@ model figure...
 
 The list of road segments are indexed in file `data/road_list.csv`:
 | road_id |
-|:----------:|
+|:-------:|
 |103103595|
 |103103090|
-|...|
+|   ...   |
 
 The road graph is constructed with [NetworkX](https://networkx.github.io/documentation/stable/tutorial.html) and saved in GML format in `data/road_graph.gml`. Each node represents a road segment (`label: road_id, length: in km`), and each directed edge represents the adjacency between to road segments (weight: exponential decay of distance).
 
@@ -48,11 +51,11 @@ The road graph is constructed with [NetworkX](https://networkx.github.io/documen
 
 Trajectories after map matching （refer to [Hidden Markov Map Matching](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/)） are saved at `data/ParsedTaxiData_YYYYMMDD.csv`:
 
-| vehicle_id | time | matched_road_id |
-|:----------:|:----------:|:----------:|
-|XXXXXXX|14/03/2016 00:00:00|103047123|
-|XXXXXXX|14/03/2016 00:00:05|103063511|
-|...|...|...|
+| vehicle_id |        time       | matched_road_id |
+|:----------:|:-----------------:|:---------------:|
+|   XXXXXXX  |14/03/2016 00:00:00|    103047123    |
+|   XXXXXXX  |14/03/2016 00:00:05|    103063511    |
+|     ...    |        ...        |       ...       |
 
 *Note:
 Files in the `data` folder contain dummy data for demo purpose. Real data have not been published due to confidentiality.*
@@ -68,11 +71,11 @@ python trajectory.py -d 20160314 >> log/trajectory0314.log
 
 Results are saved at `data/recovered_trajectory_df_20160314_20160314.csv`:
 
-| vehicle_id |trajectory_id| time | road_id |scenario|
-|:----------:|:----------:|:----------:|:----------:|:----------:|
-|XXXXXXX|0|14/03/2016 00:00:00|103047123|0.1|
-|XXXXXXX|0|14/03/2016 00:00:05|103063511|3.1|
-|...|...|...|...|...|
+| vehicle_id | trajectory_id |        time       | road_id | scenario |
+|:----------:|:-------------:|:-----------------:|:-------:|:--------:|
+|   XXXXXXX  |       0       |14/03/2016 00:00:00|103047123|    0.1   |
+|   XXXXXXX  |       0       |14/03/2016 00:00:05|103063511|    3.1   |
+|     ...    |      ...      |        ...        |   ...   |    ...   |
 
 Similarly for other dates.
  
@@ -86,11 +89,11 @@ python flow.py -d 20160314 -i 15 >> log/flow0314.log
 ```
 
 Flows are aggregated in 15-minute intervals, and are saved at `data/flow_20160314_20160314.csv`:
-|   | road_id_0 | road_id_1 | ... |
-|:----------:|:----------:|:----------:|:----------:|
-|14/03/2016 00:00:00| 33 | 67 | ... |
-|14/03/2016 00:15:00| 21 | 89 | ... |
-|...|...|...|...|
+|                   | road_id_0 | road_id_1 | ... |
+|:-----------------:|:---------:|:---------:|:---:|
+|14/03/2016 00:00:00|     33    |     67    | ... |
+|14/03/2016 00:15:00|     21    |     89    | ... |
+|        ...        |    ...    |    ...    | ... |
 
 Similarly for other dates.
 
@@ -131,7 +134,9 @@ python trajectory_transition.py -d1 20160314 -d2 20160314 >> log/transition0314.
 The result is a tensor of shape `96 (# 15-minute intervals of day), 2404 (# road segments), 2404 (# road segments)` and is saved at `data/trajectory_transition_20160314_20160314.pkl`.
 
 Run the following command for the training period.
-```python trajectory_transition.py -d1 START_DATE -d2 END_DATE >> log/transition0314.log```
+```bash
+python trajectory_transition.py -d1 START_DATE -d2 END_DATE >> log/transition0314.log
+```
 
 
 ### 2.  Train and test TrGNN
@@ -143,7 +148,9 @@ python train_model.py -m TrGNN -D demo
 python train_model.py -m TrGNN- -D demo
 ```
 
-Trained models are saved at `model/[MODEL]_[TIMESTAMP]_[EPOCH]epoch.cpt` whenever the validation MAE breaks through. The test results are saved at are saved at `result/[MODEL]_[TIMESTAMP]_Y_true.pkl` (ground truth results), and `result/[MODEL]_[TIMESTAMP]_[EPOCH]epoch_Y_pred.pkl` (predicted results). Results are of shape `# test intervals, # road segments`.
+Trained models are saved at `model/[MODEL]_[TIMESTAMP]_[EPOCH]epoch.cpt` whenever the validation MAE breaks through. 
+
+The test results are saved at are saved at `result/[MODEL]_[TIMESTAMP]_Y_true.pkl` (ground truth results), and `result/[MODEL]_[TIMESTAMP]_[EPOCH]epoch_Y_pred.pkl` (predicted results). Results are of shape `# test intervals, # road segments`.
 
 
 ### 3. Experimental result
