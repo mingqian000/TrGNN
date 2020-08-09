@@ -165,7 +165,7 @@ The test results are saved at are saved at `result/[MODEL]_[TIMESTAMP]_Y_true.pk
 We run this repository on `SG-TAXI` dataset (not released) and evaluation results are summarized in the [paper](https://github.com/mingqian000/TrGNN) (pending release).
 
 
-### 4. Visualisation (Optional)
+### 4. Visualization (Optional)
 Refer to the second half (commented out) in `utils.py` for displaying road segments, road network, and vehicle trajectories. `folium` package is required.
 
 
