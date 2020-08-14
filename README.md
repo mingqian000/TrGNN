@@ -47,16 +47,16 @@ The list of road segments are indexed in file `data/road_list.csv`:
 |103103090|
 |   ...   |
 
-The road graph is constructed with [NetworkX](https://networkx.github.io/documentation/stable/tutorial.html) and saved in GML format in `data/road_graph.gml`. Each node represents a road segment (`label: road_id, length: in km`), and each directed edge represents the adjacency between to road segments (weight: exponential decay of distance).
+The road graph is constructed with [NetworkX](https://networkx.github.io/documentation/stable/tutorial.html) and saved in GML format in `data/road_graph.gml`. Each node represents a road segment (`label: road_id, length: in km`), and each directed edge represents the adjacency between to road segments (`weight: exponential decay of distance`).
 
 ### 2. Trajectories
 
-Trajectories after map matching （refer to [Hidden Markov Map Matching](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/)） are saved at `data/ParsedTaxiData_YYYYMMDD.csv`:
+Trajectories after map matching (refer to [Hidden Markov Map Matching](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/)) are saved at `data/ParsedTaxiData_YYYYMMDD.csv`:
 
 | vehicle_id |        time       | matched_road_id |
 |:----------:|:-----------------:|:---------------:|
-|   XXXXXXX  |14/03/2016 00:00:00|    103047123    |
-|   XXXXXXX  |14/03/2016 00:00:05|    103063511    |
+|   EEEEEEE  |14/03/2016 00:00:01|    103064895    |
+|   AAAAAAA  |14/03/2016 00:00:10|    103105500    |
 |     ...    |        ...        |       ...       |
 
 *Note:
@@ -76,8 +76,8 @@ Results are saved at `data/recovered_trajectory_df_20160314_20160314.csv`:
 
 | vehicle_id | trajectory_id |        time       | road_id | scenario |
 |:----------:|:-------------:|:-----------------:|:-------:|:--------:|
-|   XXXXXXX  |       0       |14/03/2016 00:00:00|103047123|    0.1   |
-|   XXXXXXX  |       0       |14/03/2016 00:00:05|103063511|    3.1   |
+|   EEEEEEE  |       0       |14/03/2016 00:00:01|103064895|    0.1   |
+|   EEEEEEE  |       0       |14/03/2016 00:00:13|103064811|    3.1   |
 |     ...    |      ...      |        ...        |   ...   |    ...   |
 
 Similarly for other dates.
